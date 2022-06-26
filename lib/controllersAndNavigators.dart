@@ -54,7 +54,4 @@ Future<void> CheckUsers(String name,String pass,BuildContext context) async{
 
 
   });
-  if(wrong==ctr)
-    InvalidStatement="لقد ادخلت بيانات خاطئة";
-  //_navigateToScreenAdmin(context,"user.name");
 }
