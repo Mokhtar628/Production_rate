@@ -7,7 +7,10 @@ import 'User.dart';
 
 var nameCont = TextEditingController();
 var passCont = TextEditingController();
+var codeCont = TextEditingController();
+var rateCont = TextEditingController();
 String InvalidStatement = "";
+String validStatement = "";
 
 
 class Users {
@@ -44,7 +47,7 @@ Future<void> CheckUsers(String name,String pass,BuildContext context) async{
     );
     if(user.name.toLowerCase()==name.toLowerCase().trim() && user.password==pass){
       ctr++;
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => User(user.name)));
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => User(name)));
 
     }
     else{

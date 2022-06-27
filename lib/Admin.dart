@@ -1,7 +1,10 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-
+import 'package:product_rate/viewUsers.dart';
+import 'package:product_rate/controllersAndNavigators.dart';
 import 'AddUser.dart';
-
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class Admin extends StatefulWidget {
   String name;
@@ -16,6 +19,39 @@ class Admin extends StatefulWidget {
 
 class _AdminState extends State<Admin> {
   String name;
+
+  Future<void> loopAndReset() async{
+    final String url = "https://products-rate-default-rtdb.firebaseio.com/users.json";
+    final http.Response res = await http.get(url);
+    final data = json.decode(res.body) as Map<String, dynamic>;
+    Users user;
+    data.forEach((key, value) {
+      user = Users(
+          name: value["name"],
+          password: value["password"] ,
+          productionCtr: value["productionCtr"]
+      );
+      resetPerformanceCtr(user.name,user.password,user.productionCtr);
+    });
+  }
+
+  Future<void> resetPerformanceCtr(String name,String pass, int productionCtr) async{
+    var id;
+    var ref = FirebaseDatabase.instance.reference().child("users");
+    ref.once().then((DataSnapshot snapshot){
+      snapshot.value.forEach((key,values) async {
+        if(values['name']==name){
+          id= key;
+          final String url = "https://products-rate-default-rtdb.firebaseio.com/users/$id.json";
+          var res = await http.patch(url,body: json.encode({
+            "name": name,
+            "password": pass,
+            "productionCtr":0
+          }));
+        }
+      });
+    });
+  }
 
   _AdminState(String name){
     this.name=name;
@@ -108,7 +144,7 @@ class _AdminState extends State<Admin> {
                           child: Text("Reset",style: TextStyle(color: Colors.white,fontSize: 20,)),
                         ),
                         onTap: () {
-
+                          loopAndReset();
                         },
                       ),
 
@@ -125,7 +161,7 @@ class _AdminState extends State<Admin> {
                           child: Text("View users",style: TextStyle(color: Colors.white,fontSize: 20,)),
                         ),
                         onTap: () {
-
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => ViewUsers()));
                         },
                       ),
 

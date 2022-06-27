@@ -18,7 +18,7 @@ class _LogInState extends State<LogIn> {
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: Text('Login'),
+          title: Text('تسجيل الدخول'),
           flexibleSpace: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -67,7 +67,7 @@ class _LogInState extends State<LogIn> {
                             borderSide: BorderSide(color: Colors.amberAccent),
                             //  when the TextFormField in focused
                           ),
-                          hintText: "Name",
+                          hintText: "الاسم",
                           hintStyle: TextStyle(
                             color: Colors.white,
                           ),
@@ -101,7 +101,7 @@ class _LogInState extends State<LogIn> {
                             borderSide: BorderSide(color: Colors.amberAccent),
                             //  when the TextFormField in focused
                           ),
-                          hintText: "Password",
+                          hintText: "كلمة المرور",
                           hintStyle: TextStyle(
                             color: Colors.white,
                           ),
@@ -133,11 +133,11 @@ class _LogInState extends State<LogIn> {
                       onPressed: () {
                         if(nameCont.text=="" || passCont.text==""){
                           setState(() {
-                            InvalidStatement="Please enter all fields!!";
+                            InvalidStatement="الرجاء ادخال جميع الحثول";
                           });
                         }else{
                           if(nameCont.text.trim()=="Hossam" && passCont.text=="2801"){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Admin(nameCont.text)));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Admin("Hossam")));
                           }
 
                           CheckUsers(nameCont.text, passCont.text,context);
@@ -163,7 +163,7 @@ class _LogInState extends State<LogIn> {
                         ),
                         padding: const EdgeInsets.all(10.0),
                         child:
-                        const Text('Login', style: TextStyle(fontSize: 20)),
+                        const Text('تسجيل الدخول', style: TextStyle(fontSize: 20)),
                       ),
                     ),
                     Text(InvalidStatement,style: TextStyle(color: Colors.red),),

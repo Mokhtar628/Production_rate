@@ -29,6 +29,7 @@ dependencies:
   path:
   cloud_firestore: "^0.14.4"
   firestore_ui:
+  intl: ^0.16.1
 
 
   # The following adds the Cupertino Icons font to your application.
