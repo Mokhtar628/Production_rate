@@ -25,9 +25,9 @@ class _LogInState extends State<LogIn> {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: <Color>[
-                      Colors.deepPurple,
-                      Colors.purple,
-                      Colors.purpleAccent
+                    Color. fromRGBO(31,52,67, 1.0),
+                    Color. fromRGBO(39,67,89, 1.0),
+                      Color. fromRGBO(48,80,103, 1.0)
                     ])
             ),
           ),
@@ -60,11 +60,11 @@ class _LogInState extends State<LogIn> {
                         //input text color
                         decoration: InputDecoration(
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.purpleAccent),
+                            borderSide: BorderSide(color: Color.fromRGBO(39,67,89, 1.0),),
                             //  when the TextFormField in unfocused
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.amberAccent),
+                            borderSide: BorderSide(color: Colors.redAccent),
                             //  when the TextFormField in focused
                           ),
                           hintText: "الاسم",
@@ -73,7 +73,7 @@ class _LogInState extends State<LogIn> {
                           ),
                           icon: Icon(
                             Icons.person,
-                            color: Colors.purple,
+                            color: Color. fromRGBO(39,67,89, 1.0),
                           ),
                         ),
                         keyboardType: TextInputType.text,
@@ -93,12 +93,12 @@ class _LogInState extends State<LogIn> {
                         //input text color
                         decoration: InputDecoration(
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.purpleAccent),
+                            borderSide: BorderSide(color: Color. fromRGBO(39,67,89, 1.0),),
 
                             //  when the TextFormField in unfocused
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.amberAccent),
+                            borderSide: BorderSide(color: Colors.redAccent),
                             //  when the TextFormField in focused
                           ),
                           hintText: "كلمة المرور",
@@ -107,7 +107,7 @@ class _LogInState extends State<LogIn> {
                           ),
                           icon: Icon(
                             Icons.vpn_key,
-                            color: Colors.purple,
+                            color: Color. fromRGBO(39,67,89, 1.0),
                           ),
                           suffixIcon: IconButton(
                             icon: Icon(
@@ -155,9 +155,8 @@ class _LogInState extends State<LogIn> {
                         decoration: const BoxDecoration(
                           gradient: LinearGradient(
                             colors: <Color>[
-                              Colors.deepPurple,
-                              Colors.purple,
-                              Colors.purpleAccent,
+                              Colors.red,
+                              Colors.redAccent,
                             ],
                           ),
                         ),

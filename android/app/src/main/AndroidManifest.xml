@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.product_rate">
    <application
-        android:label="product_rate"
+        android:label="New tech throughput"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

@@ -31,9 +31,29 @@ class Users {
   }
 }
 
+class Products {
+  final String userName;
+  final String product_code;
+  final String date;
+  final int production_rate;
+
+  Products({this.userName, this.product_code, this.date,this.production_rate});
+
+
+  // columns in the database.
+  Map<String, dynamic> toMap() {
+    return {
+      'userName': userName,
+      'product_code': product_code,
+      'date': date,
+      'production_rate': production_rate,
+    };
+  }
+}
+
+
 
 Future<void> CheckUsers(String name,String pass,BuildContext context) async{
-  //_navigateToScreenAdmin(context,"user.name");
   final String url = "https://products-rate-default-rtdb.firebaseio.com/users.json";
   final http.Response res = await http.get(url);
   final data = json.decode(res.body) as Map<String, dynamic>;

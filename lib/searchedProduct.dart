@@ -3,22 +3,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class searchedEmp extends StatefulWidget {
-  String name ,pass;
-  int productCtr;
-  searchedEmp(String name,String pass,int ctr){
+class searchedProduct extends StatefulWidget {
+  String name ,code,date;
+  int rate;
+  searchedProduct(String name,String code,String date,int rate){
     this.name=name;
-    this.pass=pass;
-    this.productCtr=ctr;
+    this.code=code;
+    this.date=date;
+    this.rate=rate;
   }
   @override
-  _searchedEmpState createState() => _searchedEmpState(name,pass,productCtr);
+  _searchedProductState createState() => _searchedProductState(name,code,date,rate);
 }
 
-class _searchedEmpState extends State<searchedEmp> {
-  String name ,pass;
-  int productCtr;
-  _searchedEmpState(String this.name,String this.pass,int this.productCtr);
+class _searchedProductState extends State<searchedProduct> {
+  String name ,code,date;
+  int rate;
+  _searchedProductState(String this.name,String this.code,String this.date,int this.rate);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -64,12 +65,17 @@ class _searchedEmpState extends State<searchedEmp> {
                                     ),
                                     Row(
                                       children: [
-                                        Text("Password : "+pass,style: TextStyle(color: Colors.white),)
+                                        Text("Product code : "+code,style: TextStyle(color: Colors.white),)
                                       ],
                                     ),
                                     Row(
                                       children: [
-                                        Text("Production counter : $productCtr",style: TextStyle(color: Colors.white),)
+                                        Text("Production rate : $rate",style: TextStyle(color: Colors.white),)
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text("Date : "+date,style: TextStyle(color: Colors.white),)
                                       ],
                                     ),
                                   ],

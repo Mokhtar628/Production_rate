@@ -35,9 +35,9 @@ class _AddUserState extends State<AddUser> {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: <Color>[
-                        Colors.deepPurple,
-                        Colors.purple,
-                        Colors.purpleAccent
+                        Color. fromRGBO(31,52,67, 1.0),
+                        Color. fromRGBO(39,67,89, 1.0),
+                        Color. fromRGBO(48,80,103, 1.0)
                       ])
               ),
             ),
@@ -71,11 +71,11 @@ class _AddUserState extends State<AddUser> {
                           //input text color
                           decoration: InputDecoration(
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.purpleAccent),
+                              borderSide: BorderSide(color:  Color. fromRGBO(39,67,89, 1.0),),
                               //  when the TextFormField in unfocused
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.amberAccent),
+                              borderSide: BorderSide(color: Colors.redAccent),
                               //  when the TextFormField in focused
                             ),
                             hintText: "Name",
@@ -84,7 +84,7 @@ class _AddUserState extends State<AddUser> {
                             ),
                             icon: Icon(
                               Icons.person,
-                              color: Colors.purple,
+                              color: Color. fromRGBO(39,67,89, 1.0),
                             ),
                           ),
                           keyboardType: TextInputType.text,
@@ -103,11 +103,11 @@ class _AddUserState extends State<AddUser> {
                           //input text color
                           decoration: InputDecoration(
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.purpleAccent),
+                              borderSide: BorderSide(color: Color. fromRGBO(39,67,89, 1.0),),
                               //  when the TextFormField in unfocused
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.amberAccent),
+                              borderSide: BorderSide(color: Colors.redAccent),
                               //  when the TextFormField in focused
                             ),
                             hintText: "Password",
@@ -116,7 +116,9 @@ class _AddUserState extends State<AddUser> {
                             ),
                             icon: Icon(
                               Icons.vpn_key,
-                              color: Colors.purple,
+                              color:
+                              Color. fromRGBO(39,67,89, 1.0),
+
                             ),
                           ),
                           keyboardType: TextInputType.text,
@@ -149,9 +151,9 @@ class _AddUserState extends State<AddUser> {
                           decoration: const BoxDecoration(
                             gradient: LinearGradient(
                               colors: <Color>[
-                                Colors.deepPurple,
-                                Colors.purple,
-                                Colors.purpleAccent,
+                                Color. fromRGBO(31,52,67, 1.0),
+                                Color. fromRGBO(39,67,89, 1.0),
+                                Color. fromRGBO(48,80,103, 1.0)
                               ],
                             ),
                           ),

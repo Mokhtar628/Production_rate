@@ -79,9 +79,9 @@ class _UserState extends State<User> {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: <Color>[
-                        Colors.deepPurple,
-                        Colors.purple,
-                        Colors.purpleAccent
+                        Color. fromRGBO(31,52,67, 1.0),
+                        Color. fromRGBO(39,67,89, 1.0),
+                        Color. fromRGBO(48,80,103, 1.0)
                       ])
               ),
             ),
@@ -113,7 +113,7 @@ class _UserState extends State<User> {
                           //input text color
                           decoration: InputDecoration(
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.purpleAccent),
+                              borderSide: BorderSide(color: Color. fromRGBO(39,67,89, 1.0)),
                               //  when the TextFormField in unfocused
                             ),
                             focusedBorder: UnderlineInputBorder(
@@ -126,7 +126,7 @@ class _UserState extends State<User> {
                             ),
                             icon: Icon(
                               Icons.qr_code,
-                              color: Colors.purple,
+                              color: Color. fromRGBO(39,67,89, 1.0),
                             ),
                           ),
                           keyboardType: TextInputType.text,
@@ -144,7 +144,7 @@ class _UserState extends State<User> {
                           //input text color
                           decoration: InputDecoration(
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.purpleAccent),
+                              borderSide: BorderSide(color: Color. fromRGBO(39,67,89, 1.0)),
 
                               //  when the TextFormField in unfocused
                             ),
@@ -158,7 +158,7 @@ class _UserState extends State<User> {
                             ),
                             icon: Icon(
                               Icons.precision_manufacturing_outlined,
-                              color: Colors.purple,
+                              color: Color. fromRGBO(39,67,89, 1.0),
                             ),
                           ),
                           keyboardType: TextInputType.number,
@@ -191,9 +191,8 @@ class _UserState extends State<User> {
                           decoration: const BoxDecoration(
                             gradient: LinearGradient(
                               colors: <Color>[
-                                Colors.deepPurple,
-                                Colors.purple,
-                                Colors.purpleAccent,
+                                Colors.red,
+                                Colors.redAccent,
                               ],
                             ),
                           ),

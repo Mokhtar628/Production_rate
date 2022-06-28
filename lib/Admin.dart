@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:product_rate/viewProducts.dart';
 import 'package:product_rate/viewUsers.dart';
 import 'package:product_rate/controllersAndNavigators.dart';
 import 'AddUser.dart';
@@ -71,9 +72,9 @@ class _AdminState extends State<Admin> {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: <Color>[
-                        Colors.deepPurple,
-                        Colors.purple,
-                        Colors.purpleAccent
+                        Color. fromRGBO(31,52,67, 1.0),
+                        Color. fromRGBO(39,67,89, 1.0),
+                        Color. fromRGBO(48,80,103, 1.0)
                       ])
               ),
             ),
@@ -86,7 +87,7 @@ class _AdminState extends State<Admin> {
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.fromLTRB(210, 0, 0, 0),
-                  color: Colors.purpleAccent,
+                  color:Color. fromRGBO(39,67,89, 1.0),
                   child: Text("Admin Field",style: TextStyle(color: Colors.white),),
                 ),
                 SizedBox(height: 20,),
@@ -101,7 +102,7 @@ class _AdminState extends State<Admin> {
                         child: Container(
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: Colors.purple,
+                            color: Color. fromRGBO(39,67,89, 1.0),
                             borderRadius: BorderRadius.circular(10),
                             boxShadow: [
                               BoxShadow(color: Colors.white,spreadRadius: 0.5),
@@ -118,16 +119,16 @@ class _AdminState extends State<Admin> {
                         child: Container(
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: Colors.purple,
+                            color: Color. fromRGBO(39,67,89, 1.0),
                             borderRadius: BorderRadius.circular(10),
                             boxShadow: [
                               BoxShadow(color: Colors.white,spreadRadius: 0.5),
                             ],
                           ),
-                          child: Text("Download rate",style: TextStyle(color: Colors.white,fontSize: 20,)),
+                          child: Text("View products",style: TextStyle(color: Colors.white,fontSize: 20,)),
                         ),
                         onTap: () {
-
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => ViewProducts()));
                         },
                       ),
 
@@ -135,7 +136,7 @@ class _AdminState extends State<Admin> {
                         child: Container(
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: Colors.purple,
+                            color: Color. fromRGBO(39,67,89, 1.0),
                             borderRadius: BorderRadius.circular(10),
                             boxShadow: [
                               BoxShadow(color: Colors.white,spreadRadius: 0.5),
@@ -152,7 +153,7 @@ class _AdminState extends State<Admin> {
                         child: Container(
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: Colors.purple,
+                            color: Color. fromRGBO(39,67,89, 1.0),
                             borderRadius: BorderRadius.circular(10),
                             boxShadow: [
                               BoxShadow(color: Colors.white,spreadRadius: 0.5),
