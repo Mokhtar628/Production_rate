@@ -1,17 +1,16 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:product_rate/viewProducts.dart';
+import 'package:product_rate/viewUsers.dart';
+import 'AddUser.dart';
+import 'Admin.dart';
 import 'User.dart';
 
-var nameCont = TextEditingController();
-var passCont = TextEditingController();
-var codeCont = TextEditingController();
-var rateCont = TextEditingController();
+
 String InvalidStatement = "";
 String validStatement = "";
-
+Navigators navigator = new Navigators();
 
 class Users {
   final String name;
@@ -51,7 +50,13 @@ class Products {
   }
 }
 
-
+class Controllers{
+  var nameCont = TextEditingController();
+  var passCont = TextEditingController();
+  var codeCont = TextEditingController();
+  var rateCont = TextEditingController();
+  var SearchCont = TextEditingController();
+}
 
 Future<void> CheckUsers(String name,String pass,BuildContext context) async{
   final String url = "https://products-rate-default-rtdb.firebaseio.com/users.json";
@@ -77,4 +82,24 @@ Future<void> CheckUsers(String name,String pass,BuildContext context) async{
 
 
   });
+}
+
+class Navigators{
+  void addUserUI(BuildContext context){
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddUser()));
+  }
+
+  void viewProductsUI(BuildContext context){
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ViewProducts()));
+  }
+
+  void viewUsersUI(BuildContext context){
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ViewUsers()));
+  }
+
+  void adminUI(BuildContext context){
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Admin("Hossam")));
+  }
+
+
 }

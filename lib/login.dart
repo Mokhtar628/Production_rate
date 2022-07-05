@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:product_rate/controllersAndNavigators.dart';
 
-import 'Admin.dart';
-
 class LogIn extends StatefulWidget {
   @override
   _LogInState createState() => _LogInState();
@@ -10,6 +8,7 @@ class LogIn extends StatefulWidget {
 
 class _LogInState extends State<LogIn> {
   bool _passwordVisible = false;
+  Controllers controllers = new Controllers();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +51,7 @@ class _LogInState extends State<LogIn> {
                       margin: EdgeInsets.all(12.0),
                       child: TextField(
                         maxLength: 30,
-                        controller: nameCont,
+                        controller: controllers.nameCont,
                         //save inputs
                         style: TextStyle(
                           color: Colors.white,
@@ -85,7 +84,7 @@ class _LogInState extends State<LogIn> {
                       child: TextField(
                         obscureText: !_passwordVisible,
                         maxLength: 30,
-                        controller: passCont,
+                        controller: controllers.passCont,
                         //save inputs
                         style: TextStyle(
                           color: Colors.white,
@@ -131,19 +130,19 @@ class _LogInState extends State<LogIn> {
 
                     RaisedButton(
                       onPressed: () {
-                        if(nameCont.text=="" || passCont.text==""){
+                        if(controllers.nameCont.text=="" || controllers.passCont.text==""){
                           setState(() {
                             InvalidStatement="الرجاء ادخال جميع الحثول";
                           });
                         }else{
-                          if(nameCont.text.trim()=="Hossam" && passCont.text=="2801"){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Admin("Hossam")));
+                          if(controllers.nameCont.text.trim()=="Hossam" && controllers.passCont.text=="2801"){
+                            navigator.adminUI(context);
                           }
 
-                          CheckUsers(nameCont.text, passCont.text,context);
+                          CheckUsers(controllers.nameCont.text, controllers.passCont.text,context);
                           setState(() {
-                            nameCont.text="";
-                            passCont.text="";
+                            controllers.nameCont.text="";
+                            controllers.passCont.text="";
                           });
                         }
                       },

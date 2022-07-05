@@ -1,9 +1,7 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:product_rate/controllersAndNavigators.dart';
 import 'package:intl/intl.dart';
+import 'package:product_rate/fireBaseController.dart';
 
 class User extends StatefulWidget {
   String name;
@@ -18,48 +16,6 @@ class User extends StatefulWidget {
 
 class _UserState extends State<User> {
   String name;
-
-  void addData(String name,String productCode,int productRate, String date){
-    DatabaseReference _ref;
-    _ref=FirebaseDatabase.instance.reference().child("products");
-    _ref.push().set({'userName':name.trim(),'product_code':productCode.trim(),'production_rate':productRate,'date':date});
-  }
-
-  Future<void> searchAndIncreament(String name) async{
-    final String url = "https://products-rate-default-rtdb.firebaseio.com/users.json";
-    final http.Response res = await http.get(url);
-    final data = json.decode(res.body) as Map<String, dynamic>;
-    Users user;
-    data.forEach((key, value) {
-      user = Users(
-          name: value["name"],
-          password: value["password"] ,
-          productionCtr: value["productionCtr"]
-      );
-      if(user.name.toLowerCase()==name.trim().toLowerCase()){
-        increamentPerformanceCtr(user.name,user.password,user.productionCtr);
-      }
-    });
-  }
-
-  Future<void> increamentPerformanceCtr(String name,String pass, int productionCtr) async{
-    var id;
-    var ref = FirebaseDatabase.instance.reference().child("users");
-    ref.once().then((DataSnapshot snapshot){
-      snapshot.value.forEach((key,values) async {
-        if(values['name']==name){
-          id= key;
-          final String url = "https://products-rate-default-rtdb.firebaseio.com/users/$id.json";
-          var res = await http.patch(url,body: json.encode({
-            "name": name,
-            "password": pass,
-            "productionCtr":productionCtr+1
-          }));
-        }
-      });
-    });
-  }
-
   _UserState(String name){
     this.name=name;
   }
@@ -105,7 +61,7 @@ class _UserState extends State<User> {
                       Container(
                         margin: EdgeInsets.all(12.0),
                         child: TextField(
-                          controller: codeCont,
+                          controller: controllers.codeCont,
                           //save inputs
                           style: TextStyle(
                             color: Colors.white,
@@ -136,7 +92,7 @@ class _UserState extends State<User> {
                       Container(
                         margin: EdgeInsets.all(12.0),
                         child: TextField(
-                          controller: rateCont,
+                          controller: controllers.rateCont,
                           //save inputs
                           style: TextStyle(
                             color: Colors.white,
@@ -167,17 +123,17 @@ class _UserState extends State<User> {
 
                       RaisedButton(
                         onPressed: () {
-                          if(codeCont.text=="" || rateCont.text==""){
+                          if(controllers.codeCont.text=="" || controllers.rateCont.text==""){
                             setState(() {
                               InvalidStatement="الرجاء ادخال كل الحقول";
                               validStatement="";
                             });
                           }else{
-                            addData(this.name,codeCont.text, int.parse(rateCont.text),DateFormat("yyyy-MM-dd").format(DateTime.now()));
-                            searchAndIncreament(this.name);
+                            productsChild.add(this.name,controllers.codeCont.text, int.parse(controllers.rateCont.text),DateFormat("yyyy-MM-dd").format(DateTime.now()));
+                            usersChild.searchAndIncreament(this.name);
                             setState(() {
-                              codeCont.text="";
-                              rateCont.text="";
+                              controllers.codeCont.text="";
+                              controllers.rateCont.text="";
                               validStatement="تم اضافة المنتج";
                               InvalidStatement="";
                             });

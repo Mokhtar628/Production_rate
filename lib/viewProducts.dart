@@ -1,13 +1,7 @@
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:http/http.dart' as http;
-import 'package:product_rate/searchedProduct.dart';
-import 'package:product_rate/searchedUser.dart';
-import 'dart:convert';
-
-import 'controllersAndNavigators.dart';
+import 'fireBaseController.dart';
 
 
 
@@ -15,8 +9,6 @@ class ViewProducts extends StatefulWidget {
   @override
   _ViewProductsState createState() => _ViewProductsState();
 }
-
-var SearchCont = TextEditingController();
 
 
 class _ViewProductsState extends State<ViewProducts> {
@@ -42,7 +34,7 @@ class _ViewProductsState extends State<ViewProducts> {
               color: Colors.redAccent,
               onPressed: () {
                 setState(() {
-                  searchfun(SearchCont.text,context);
+                  productsChild.search(controllers.SearchCont.text,context);
                 });
               },
               child: Icon(Icons.search),
@@ -152,7 +144,7 @@ class TextBox extends StatelessWidget {
       color: Colors.white,
       height: 80,
       child: TextField(
-        controller: SearchCont,
+        controller: controllers.SearchCont,
         decoration:
         InputDecoration(border: InputBorder.none, hintText: 'Search product',contentPadding: EdgeInsets.fromLTRB(20,0,0,0),),
       ),
@@ -160,22 +152,5 @@ class TextBox extends StatelessWidget {
   }
 }
 
-Future<void> searchfun(String text,BuildContext context) async{
-  final String url = "https://products-rate-default-rtdb.firebaseio.com/products.json";
-  final http.Response res = await http.get(url);
-  final data = json.decode(res.body) as Map<String, dynamic>;
-  Products products;
-  data.forEach((key, value) {
-    products = Products(
-        userName: value["userName"],
-        product_code: value["product_code"] ,
-        production_rate: value["production_rate"],
-        date: value["date"]
-    );
-    if(products.product_code.toLowerCase()==text.trim().toLowerCase()){
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => searchedProduct(value["userName"],value["product_code"],value["date"],value["production_rate"])));
-    }
-  });
-  //_navigateToScreenAdmin(context,"user.name");
-}
+
 

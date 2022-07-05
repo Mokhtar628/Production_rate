@@ -1,5 +1,5 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'fireBaseController.dart';
 
 class AddUser extends StatefulWidget {
   @override
@@ -8,16 +8,8 @@ class AddUser extends StatefulWidget {
 
 class _AddUserState extends State<AddUser> {
   String InvalidStatement="";
-  //function to add data to firebase
-  void addData(String name,String pass){
-    DatabaseReference _ref;
-    _ref=FirebaseDatabase.instance.reference().child("users");
-    _ref.push().set({'name':name.trim(),'password':pass,'productionCtr':0});
-  }
-  //-------------------------------
   String dropdownValue;
-  var nameCont = TextEditingController();
-  var passCont = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -63,7 +55,7 @@ class _AddUserState extends State<AddUser> {
                         margin: EdgeInsets.all(12.0),
                         child: TextField(
                           maxLength: 30,
-                          controller: nameCont,
+                          controller: controllers.nameCont,
                           //save inputs
                           style: TextStyle(
                             color: Colors.white,
@@ -95,7 +87,7 @@ class _AddUserState extends State<AddUser> {
                         margin: EdgeInsets.all(12.0),
                         child: TextField(
                           maxLength: 30,
-                          controller: passCont,
+                          controller: controllers.passCont,
                           //save inputs
                           style: TextStyle(
                             color: Colors.white,
@@ -129,15 +121,15 @@ class _AddUserState extends State<AddUser> {
 
                       RaisedButton(
                         onPressed: () {
-                          if(nameCont.text=="" || passCont.text==""){
+                          if(controllers.nameCont.text=="" || controllers.passCont.text==""){
                             setState(() {
                               InvalidStatement="Please enter all fields!!";
                             });
                           }else{
-                            addData(nameCont.text, passCont.text);
+                            usersChild.add(controllers.nameCont.text, controllers.passCont.text);
                             setState(() {
-                              nameCont.text = "";
-                              passCont.text = "";
+                              controllers.nameCont.text = "";
+                              controllers.passCont.text = "";
                               InvalidStatement="Added successfully";
                             });
 
