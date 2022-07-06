@@ -56,6 +56,7 @@ class Controllers{
   var codeCont = TextEditingController();
   var rateCont = TextEditingController();
   var SearchCont = TextEditingController();
+  var op_description = TextEditingController();
 }
 
 Future<void> CheckUsers(String name,String pass,BuildContext context) async{

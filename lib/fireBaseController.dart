@@ -117,8 +117,8 @@ class ProductsChild extends FireBaseController{
     super.connection = connection;
   }
 
-  void add(String name,String productCode,int productRate, String date){
-    connection.push().set({'userName':name.trim(),'product_code':productCode.trim(),'production_rate':productRate,'date':date});
+  void add(String name,String productCode,int productRate, String date, String op_description){
+    connection.push().set({'userName':name.trim(),'product_code':productCode.trim(),'production_rate':productRate,'date':date, 'operation_description':op_description});
   }
 
   Future<void> search(String text,BuildContext context) async{
