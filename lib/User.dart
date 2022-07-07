@@ -44,13 +44,17 @@ class _UserState extends State<User> {
           ),// app bar end here --------------------------
 
           body: Container(
+            //padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom)/100,
+
             width: double.infinity,
             height: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(40, 130, 40, 0),
+              padding: const EdgeInsets.fromLTRB(40, 90, 40, 0),
+
               child: SingleChildScrollView(
 
                 child: Container(
+
                   height: 400,
                   alignment: Alignment.center,
                   color: Color(0x70000000),
@@ -155,7 +159,7 @@ class _UserState extends State<User> {
 
                       RaisedButton(
                         onPressed: () {
-                          if(controllers.codeCont.text=="" || controllers.rateCont.text==""){
+                          if(controllers.codeCont.text=="" || controllers.rateCont.text=="" || controllers.op_description.text==""){
                             setState(() {
                               InvalidStatement="الرجاء ادخال كل الحقول";
                               validStatement="";

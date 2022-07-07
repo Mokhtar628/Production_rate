@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:product_rate/searchedProduct.dart';
 import 'package:product_rate/searchedUser.dart';
 import 'controllersAndNavigators.dart';
@@ -9,6 +10,7 @@ import 'controllersAndNavigators.dart';
 UsersChild usersChild = new UsersChild(FirebaseDatabase.instance.reference().child("users"));
 ProductsChild productsChild = new ProductsChild(FirebaseDatabase.instance.reference().child("products"));
 Controllers controllers = new Controllers();
+InventoryChild inventoryChild = new InventoryChild(FirebaseDatabase.instance.reference().child("inventory"));
 
 
 
@@ -135,6 +137,33 @@ class ProductsChild extends FireBaseController{
       );
       if(products.product_code.toLowerCase()==text.trim().toLowerCase()){
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => searchedProduct(value["userName"],value["product_code"],value["date"],value["production_rate"])));
+      }
+    });
+  }
+}
+class InventoryChild extends FireBaseController{
+  InventoryChild(DatabaseReference connection){
+    super.connection = connection;
+  }
+
+  void add(String productCode,int recivedProduct,String name){
+    connection.push().set({'userName':name.trim(),'product_code':productCode.trim(),'Recived_product':recivedProduct,'date':DateFormat("yyyy-MM-dd").format(DateTime.now()),});
+  }
+
+  Future<void> search(String text,BuildContext context) async{
+    final String url = "https://products-rate-default-rtdb.firebaseio.com/inventory.json";
+    final http.Response res = await http.get(url);
+    final data = json.decode(res.body) as Map<String, dynamic>;
+    Inventoryproducts products;
+    data.forEach((key, value) {
+      products = Inventoryproducts(
+          userName: value["userName"],
+          product_code: value["product_code"] ,
+          Recived_product: value["Recived_product"],
+          date: value["date"]
+      );
+      if(products.product_code.toLowerCase()==text.trim().toLowerCase()){
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => searchedProduct(value["userName"],value["product_code"],value["date"],value["Recived_product"])));
       }
     });
   }

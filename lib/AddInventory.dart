@@ -1,32 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:product_rate/controllersAndNavigators.dart';
-import 'AddInventory.dart';
+import 'fireBaseController.dart';
 
-class LogIn extends StatefulWidget {
+class AddInventory extends StatefulWidget {
+  String name;
+
+  AddInventory (String name){
+    this.name=name;
+  }
+
   @override
-  _LogInState createState() => _LogInState();
+  _AddInventoryState createState() => _AddInventoryState(this.name);
 }
 
-class _LogInState extends State<LogIn> {
-  bool _passwordVisible = false;
-  Controllers controllers = new Controllers();
+class _AddInventoryState extends State<AddInventory> {
+  String InvalidStatement="";
+  String validStatement="";
+  String dropdownValue;
+  String name;
+
+  _AddInventoryState(String name){
+    this.name=name;
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+
+      ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: Text('تسجيل الدخول'),
+          title: Text('المخازن'),
           flexibleSpace: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: <Color>[
-                    Color. fromRGBO(31,52,67, 1.0),
-                    Color. fromRGBO(39,67,89, 1.0),
+                      Color. fromRGBO(31,52,67, 1.0),
+                      Color. fromRGBO(39,67,89, 1.0),
                       Color. fromRGBO(48,80,103, 1.0)
                     ])
             ),
@@ -36,8 +50,9 @@ class _LogInState extends State<LogIn> {
         body: Container(
           width: double.infinity,
           height: double.infinity,
+
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(40, 95, 40, 0),
+            padding: const EdgeInsets.fromLTRB(40, 90, 40, 0),
             child: SingleChildScrollView(
 
               child: Container(
@@ -52,7 +67,7 @@ class _LogInState extends State<LogIn> {
                       margin: EdgeInsets.all(12.0),
                       child: TextField(
                         maxLength: 30,
-                        controller: controllers.nameCont,
+                        controller: controllers.codeInventory,
                         //save inputs
                         style: TextStyle(
                           color: Colors.white,
@@ -60,19 +75,19 @@ class _LogInState extends State<LogIn> {
                         //input text color
                         decoration: InputDecoration(
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Color.fromRGBO(39,67,89, 1.0),),
+                            borderSide: BorderSide(color:  Color. fromRGBO(39,67,89, 1.0),),
                             //  when the TextFormField in unfocused
                           ),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.redAccent),
                             //  when the TextFormField in focused
                           ),
-                          hintText: "الاسم",
+                          hintText: "كود المنتج",
                           hintStyle: TextStyle(
                             color: Colors.white,
                           ),
                           icon: Icon(
-                            Icons.person,
+                            Icons.qr_code,
                             color: Color. fromRGBO(39,67,89, 1.0),
                           ),
                         ),
@@ -83,9 +98,8 @@ class _LogInState extends State<LogIn> {
                     Container(
                       margin: EdgeInsets.all(12.0),
                       child: TextField(
-                        obscureText: !_passwordVisible,
                         maxLength: 30,
-                        controller: controllers.passCont,
+                        controller: controllers.numberInventory,
                         //save inputs
                         style: TextStyle(
                           color: Colors.white,
@@ -94,64 +108,45 @@ class _LogInState extends State<LogIn> {
                         decoration: InputDecoration(
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Color. fromRGBO(39,67,89, 1.0),),
-
                             //  when the TextFormField in unfocused
                           ),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.redAccent),
                             //  when the TextFormField in focused
                           ),
-                          hintText: "كلمة المرور",
+                          hintText: "الكمية المستلمة",
                           hintStyle: TextStyle(
                             color: Colors.white,
                           ),
                           icon: Icon(
-                            Icons.vpn_key,
-                            color: Color. fromRGBO(39,67,89, 1.0),
-                          ),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              // Based on passwordVisible state choose the icon
-                              _passwordVisible
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: Theme.of(context).primaryColorLight,
-                            ),
-                            onPressed: () {
-                              // Update the state i.e. toogle the state of passwordVisible variable
-                              setState(() {
-                                _passwordVisible = !_passwordVisible;
-                              });
-                            },
+                            Icons.add_business_outlined,
+                            color:
+                            Color. fromRGBO(39,67,89, 1.0),
+
                           ),
                         ),
                         keyboardType: TextInputType.text,
                       ),
                     ),//pass
 
+
+
                     RaisedButton(
                       onPressed: () {
-                        if(controllers.nameCont.text=="" || controllers.passCont.text==""){
+                        if(controllers.codeInventory.text=="" || controllers.numberInventory.text==""){
                           setState(() {
-                            InvalidStatement="الرجاء ادخال جميع الحقول";
+                            InvalidStatement="الرجاء ادخال كل الحقول";
+                            validStatement="";
                           });
                         }else{
-                          if(controllers.nameCont.text.trim()=="Hossam" && controllers.passCont.text=="2801"){
-                            navigator.adminUI(context);
-                          }else if(controllers.nameCont.text.trim()=="hashim"  && controllers.passCont.text=="1234"){
-                            //navigator.addInventoryUI(context,controllers.nameCont.text.trim());
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddInventory("hashim")));
-
-                          }
-                          else if (controllers.nameCont.text.trim()=="ahmed" && controllers.passCont.text=="1234"){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddInventory("ahmed")));
-                          }
-
-                          CheckUsers(controllers.nameCont.text, controllers.passCont.text,context);
+                          inventoryChild.add(controllers.codeInventory.text, int.parse(controllers.numberInventory.text),this.name);
                           setState(() {
-                            controllers.nameCont.text="";
-                            controllers.passCont.text="";
+                            controllers.codeInventory.text = "";
+                            controllers.numberInventory.text = "";
+                            validStatement="تم الادخال بنجاح";
+                            InvalidStatement="";
                           });
+
                         }
                       },
                       textColor: Colors.white,
@@ -162,16 +157,18 @@ class _LogInState extends State<LogIn> {
                         decoration: const BoxDecoration(
                           gradient: LinearGradient(
                             colors: <Color>[
-                              Colors.red,
-                              Colors.redAccent,
+                              Color. fromRGBO(31,52,67, 1.0),
+                              Color. fromRGBO(39,67,89, 1.0),
+                              Color. fromRGBO(48,80,103, 1.0)
                             ],
                           ),
                         ),
                         padding: const EdgeInsets.all(10.0),
                         child:
-                        const Text('تسجيل الدخول', style: TextStyle(fontSize: 20)),
+                        const Text('ادخال', style: TextStyle(fontSize: 20)),
                       ),
                     ),
+                    Text(validStatement,style: TextStyle(color: Colors.green),),
                     Text(InvalidStatement,style: TextStyle(color: Colors.red),),
 
                   ],
@@ -180,6 +177,8 @@ class _LogInState extends State<LogIn> {
             ),
           ),
         ),
+
+
       ),
     );
   }

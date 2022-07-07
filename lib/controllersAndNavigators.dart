@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:product_rate/viewInventory.dart';
 import 'package:product_rate/viewProducts.dart';
 import 'package:product_rate/viewUsers.dart';
+import 'AddInventory.dart';
 import 'AddUser.dart';
 import 'Admin.dart';
 import 'User.dart';
@@ -50,6 +52,26 @@ class Products {
   }
 }
 
+class Inventoryproducts {
+  final String userName;
+  final String product_code;
+  final String date;
+  final int Recived_product;
+
+  Inventoryproducts({this.userName, this.product_code, this.date,this.Recived_product});
+
+
+  // columns in the database.
+  Map<String, dynamic> toMap() {
+    return {
+      'userName': userName,
+      'product_code': product_code,
+      'date': date,
+      'Recived_product': Recived_product,
+    };
+  }
+}
+
 class Controllers{
   var nameCont = TextEditingController();
   var passCont = TextEditingController();
@@ -57,6 +79,10 @@ class Controllers{
   var rateCont = TextEditingController();
   var SearchCont = TextEditingController();
   var op_description = TextEditingController();
+  var codeInventory = TextEditingController();
+  var numberInventory = TextEditingController();
+
+
 }
 
 Future<void> CheckUsers(String name,String pass,BuildContext context) async{
@@ -100,6 +126,14 @@ class Navigators{
 
   void adminUI(BuildContext context){
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => Admin("Hossam")));
+  }
+
+  void addInventoryUI(BuildContext context,String name){
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddInventory(name)));
+  }
+
+  void viewInventoryUI(BuildContext context){
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ViewInventory()));
   }
 
 
