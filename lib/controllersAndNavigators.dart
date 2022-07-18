@@ -37,8 +37,11 @@ class Products {
   final String product_code;
   final String date;
   final int production_rate;
+  final String operation_description;
+  final String worker;
 
-  Products({this.userName, this.product_code, this.date,this.production_rate});
+
+  Products({this.userName, this.product_code, this.date,this.production_rate,this.operation_description,this.worker});
 
 
   // columns in the database.
@@ -48,6 +51,8 @@ class Products {
       'product_code': product_code,
       'date': date,
       'production_rate': production_rate,
+      'operation_description':operation_description,
+      'worker':worker
     };
   }
 }
@@ -81,6 +86,7 @@ class Controllers{
   var op_description = TextEditingController();
   var codeInventory = TextEditingController();
   var numberInventory = TextEditingController();
+  var worker = TextEditingController();
 
 
 }

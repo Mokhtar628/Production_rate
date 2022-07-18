@@ -74,63 +74,75 @@ class _ViewProductsState extends State<ViewProducts> {
 Widget userWidget({Map product})
 {
   if(true){//SearchCont.text == emp['name']
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Container(
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Container(
-                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      width: 280,
-                      height: 90,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(colors: [Color. fromRGBO(31,52,67, 1.0),
-                          Color. fromRGBO(39,67,89, 1.0),
-                          Color. fromRGBO(48,80,103, 1.0)]),
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Text("User name : ${product['userName']}",style: TextStyle(color: Colors.white),)
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text("Product code : ${product['product_code']}",style: TextStyle(color: Colors.white),)
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text("Production rate : ${product['production_rate']}",style: TextStyle(color: Colors.white),)
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text("Date : ${product['date']}",style: TextStyle(color: Colors.white),)
-                              ],
-                            ),
-                          ],
+    return SingleChildScrollView(
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            Container(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Container(
+                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        width: 285,
+                        height: 150,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(colors: [Color. fromRGBO(31,52,67, 1.0),
+                            Color. fromRGBO(39,67,89, 1.0),
+                            Color. fromRGBO(48,80,103, 1.0)]),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Text("User name : ${product['userName']}",style: TextStyle(color: Colors.white),)
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text("Product code : ${product['product_code']}",style: TextStyle(color: Colors.white),)
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text("Production rate : ${product['production_rate']}",style: TextStyle(color: Colors.white),)
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text("Date : ${product['date']}",style: TextStyle(color: Colors.white),)
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text("Description: ${product['operation_description']}",style: TextStyle(color: Colors.white),)
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text("Worker: ${product['worker']}",style: TextStyle(color: Colors.white),)
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(height: 12,),
-              ],
+                  SizedBox(height: 12,),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

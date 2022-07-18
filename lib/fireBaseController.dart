@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:product_rate/searchedInventory.dart';
 import 'package:product_rate/searchedProduct.dart';
 import 'package:product_rate/searchedUser.dart';
 import 'controllersAndNavigators.dart';
@@ -119,8 +120,8 @@ class ProductsChild extends FireBaseController{
     super.connection = connection;
   }
 
-  void add(String name,String productCode,int productRate, String date, String op_description){
-    connection.push().set({'userName':name.trim(),'product_code':productCode.trim(),'production_rate':productRate,'date':date, 'operation_description':op_description});
+  void add(String name,String productCode,int productRate, String date, String op_description, String worker){
+    connection.push().set({'userName':name.trim(),'product_code':productCode.trim(),'production_rate':productRate,'date':date, 'operation_description':op_description, 'worker':worker});
   }
 
   Future<void> search(String text,BuildContext context) async{
@@ -130,13 +131,16 @@ class ProductsChild extends FireBaseController{
     Products products;
     data.forEach((key, value) {
       products = Products(
-          userName: value["userName"],
-          product_code: value["product_code"] ,
-          production_rate: value["production_rate"],
-          date: value["date"]
+        userName: value["userName"],
+        product_code: value["product_code"] ,
+        production_rate: value["production_rate"],
+        date: value["date"],
+        operation_description: value["operation_description"],
+        worker: value['worker'],
+
       );
       if(products.product_code.toLowerCase()==text.trim().toLowerCase()){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => searchedProduct(value["userName"],value["product_code"],value["date"],value["production_rate"])));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => searchedProduct(value["userName"],value["product_code"],value["date"],value["production_rate"],value["operation_description"],value["worker"])));
       }
     });
   }
@@ -163,7 +167,7 @@ class InventoryChild extends FireBaseController{
           date: value["date"]
       );
       if(products.product_code.toLowerCase()==text.trim().toLowerCase()){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => searchedProduct(value["userName"],value["product_code"],value["date"],value["Recived_product"])));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => SearchedInventory(value["userName"],value["product_code"],value["date"],value["Recived_product"])));
       }
     });
   }

@@ -49,13 +49,13 @@ class _UserState extends State<User> {
             width: double.infinity,
             height: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(40, 90, 40, 0),
+              padding: const EdgeInsets.fromLTRB(40, 40, 40, 0),
 
               child: SingleChildScrollView(
 
                 child: Container(
 
-                  height: 400,
+                  height: 420,
                   alignment: Alignment.center,
                   color: Color(0x70000000),
                   child: Column(
@@ -128,6 +128,37 @@ class _UserState extends State<User> {
                       Container(
                         margin: EdgeInsets.all(12.0),
                         child: TextField(
+                          controller: controllers.worker,
+                          //save inputs
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                          //input text color
+                          decoration: InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color. fromRGBO(39,67,89, 1.0)),
+
+                              //  when the TextFormField in unfocused
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.amberAccent),
+                              //  when the TextFormField in focused
+                            ),
+                            hintText: "القائم بالعملية",
+                            hintStyle: TextStyle(
+                              color: Colors.white,
+                            ),
+                            icon: Icon(
+                              Icons.engineering_outlined,
+                              color: Color. fromRGBO(39,67,89, 1.0),
+                            ),
+                          ),
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.all(12.0),
+                        child: TextField(
                           controller: controllers.op_description,
                           //save inputs
                           style: TextStyle(
@@ -149,7 +180,7 @@ class _UserState extends State<User> {
                               color: Colors.white,
                             ),
                             icon: Icon(
-                              Icons.precision_manufacturing_outlined,
+                              Icons.article_outlined,
                               color: Color. fromRGBO(39,67,89, 1.0),
                             ),
                           ),
@@ -165,12 +196,13 @@ class _UserState extends State<User> {
                               validStatement="";
                             });
                           }else{
-                            productsChild.add(this.name,controllers.codeCont.text, int.parse(controllers.rateCont.text),DateFormat("yyyy-MM-dd").format(DateTime.now()),controllers.op_description.text);
+                            productsChild.add(this.name,controllers.codeCont.text, int.parse(controllers.rateCont.text),DateFormat("yyyy-MM-dd").format(DateTime.now()),controllers.op_description.text,controllers.worker.text);
                             usersChild.searchAndIncreament(this.name);
                             setState(() {
                               controllers.codeCont.text="";
                               controllers.rateCont.text="";
                               controllers.op_description.text="";
+                              controllers.worker.text="";
                               validStatement="تم اضافة المنتج";
                               InvalidStatement="";
                             });
